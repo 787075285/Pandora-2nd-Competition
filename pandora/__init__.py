@@ -4,6 +4,7 @@ import requests
 from lxml import etree
 import json
 from flask import request
+from flask import jsonify
 
 
 def create_app():
@@ -78,14 +79,16 @@ def create_app():
         j = 0
         list1=[]
         while i >j:
-            data={}
-            data["city"]=content1[j]
-            data["company"]=content2[j]
-            data["exposure_time"]=content3[j]
-            data["description"]=content4[j]
+            data={
+                "city": content1[j]
+                "company": content2[j]
+                "exposure_time": content3[j]
+                "description": content4[j]
+                }
             list1.append(data)
             j+=1
-        return json.dumps(list1)
+        app.config['JSON_AS_ASCII'] = False
+        return jsonify(list1)
 
         
 
